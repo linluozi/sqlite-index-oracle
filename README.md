@@ -25,8 +25,11 @@ python3 -m venv .venv
 Example output from the evidence workload:
 
 ```
-accepted idx_oracle_events_category_status_score             9.18x  9.18x on 136 queries, results identical, used by 136/136 plans
-accepted idx_oracle_events_category_status                   5.25x  5.25x on 136 queries, results identical, used by 136/136 plans
+accepted idx_oracle_events_category_status_score            9.18x  9.18x on 136 queries, results identical, used by 136/136 plans
+accepted idx_oracle_events_category_score                   8.17x  8.17x on 136 queries, results identical, used by 133/136 plans
+accepted idx_oracle_events_category_status                  5.25x  5.25x on 136 queries, results identical, used by 136/136 plans
+accepted idx_oracle_events_status_score                     3.47x  3.47x on 136 queries, results identical, used by 123/136 plans
+accepted idx_oracle_events_category                           3.34x  3.34x on 136 queries, results identical, used by 133/136 plans
 rejected idx_oracle_events_status                            0.98x  speedup 0.981x below 1.10x
 ```
 
