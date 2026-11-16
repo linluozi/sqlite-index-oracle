@@ -72,7 +72,7 @@ runs on this machine; JSON is `evidence/advice.json`.
 | Best measured speedup | **9.18x** |
 | Result mismatches across accepted candidates | **0** |
 | Accepted candidates confirmed by query plan | 5 / 5 |
-| Full run wall time | 1.80 s |
+| Full run wall time | 1.80 s (varies with machine load; a clean-clone rerun measured 1.83 s and 9.68x) |
 
 The rejected index is the point of the gate: `status` alone measured **0.98x**,
 i.e. slightly slower than the table scan, and the tool refuses to recommend it.
@@ -100,6 +100,10 @@ workload, and consistency of the reported arithmetic.
 
 * The workload must be self-contained SQL with literal values, one statement
   per line; placeholders/parameter binding are not supported.
+* Result comparison is order-sensitive (`repr(rows)`), so a query without a
+  deterministic `ORDER BY` may be rejected as a "mismatch" when an index
+  changes row order. That is deliberate: a false recommendation is worse than
+  a missed one, and the evidence workload always pins the order.
 * `EXPLAIN QUERY PLAN` naming is matched against the generated index name;
   SQLite versions that print a covering-index mention are handled by substring
   matching, but this is a heuristic for plan attribution.
